@@ -101,8 +101,15 @@ export async function POST(req: NextRequest) {
 
     if (eventType === "user.deleted") {
       const { id } = evt.data;
-      console.log(`🗑️ User ${id} deleted`);
-      // TODO: Handle user deletion - clean up user data
+      console.log(`🗑️ Deleting user ${id} and all associated data`);
+
+      try {
+        await convex.mutation(api.users.deleteUser, { clerkId: id });
+        console.log("✅ User and all data deleted from Convex");
+      } catch (error) {
+        console.error("❌ Failed to delete user from Convex:", error);
+        // Don't throw - user is already deleted from Clerk
+      }
     }
 
     return new Response("", { status: 200 });

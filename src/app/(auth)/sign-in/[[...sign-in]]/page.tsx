@@ -53,7 +53,7 @@ export default function SignInPage() {
               alert: "bg-[#1A1A1D] border border-white/[0.06] text-[#F7F8F8]",
             },
           }}
-          fallbackRedirectUrl="/dashboard"
+          fallbackRedirectUrl="/onboarding"
         />
 
         {/* Footer */}
